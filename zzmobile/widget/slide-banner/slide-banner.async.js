@@ -1,6 +1,6 @@
 module.exports = Pagelet.extend({
     el: '#widgetSlideBanner',
-    init: function(spec, config) {
+    init: function(spec) {
 
         this.banners = [];
         this.currIndex = 0;
@@ -11,9 +11,9 @@ module.exports = Pagelet.extend({
         this.slideBox = null;
         this.imgH = 0;
 
-        var conf = config || {};
 
-        this.banners = spec||[{
+
+        this.banners = spec.bannerList||[{
             link:"#",
             bgcolor:"#fff",
             img:"/res/img/banner/banner_01.jpg"
@@ -21,7 +21,7 @@ module.exports = Pagelet.extend({
 
         var mainCon = $("<div>",{'class':'main-banner'});
 
-        this.bannerContainer = conf.container || $('body');
+        this.bannerContainer = spec.container || $('body');
         this.bannerContainer.html(mainCon);
 
         //绘制框架
@@ -31,22 +31,22 @@ module.exports = Pagelet.extend({
         this.imgBox = mainCon.find(".banner-bg-img");
         this.slideBox = mainCon.find(".banner-bg-slide");
 
-        this.imgH = conf.height || 300;
+        this.imgH = spec.height || 300;
         //设置banner容器高度
-        this.imgBox.parent().parent().height(imgH);
+        this.imgBox.parent().parent().height(this.imgH);
         this._render();
         this._bind();
         this._play();
         //设置item高度
-        this.imgBox.find("li").height(imgH);
-        this.imgBox.find("li a").height(imgH);
+        this.imgBox.find("li").height(this.imgH);
+        this.imgBox.find("li a").height(this.imgH);
     },
     _render: function(){
         var imgHtml=[],
             slideHtml=[];
         var that = this;
         $.each(that.banners, function(i,item){
-            var isLink = _hasLink(item.link);
+            var isLink = that._hasLink(item.link);
             imgHtml[i] = [
                 '<li'+(i==0 ? ' class="img-on"':'')+' style="background:url('+item.img+') no-repeat center center '+item.bgcolor+'">',
                     isLink ? '<a href="'+item.link+'" target="_blank"></a>':'',
@@ -72,7 +72,7 @@ module.exports = Pagelet.extend({
     _bind: function(){
         var that = this;
         this.slideBox.find("a").on("mouseenter click",function(){
-            clearTimeout(slideTimeout);
+            clearTimeout(that.slideTimeout);
 
             var index = $(this).attr("data-index");
             if(index){
@@ -96,8 +96,8 @@ module.exports = Pagelet.extend({
     },
     _play: function(){
         var that = this;
-        clearTimeout(slideTimeout);
-        slideTimeout = setTimeout(function(){
+        clearTimeout(that.slideTimeout);
+        that.slideTimeout = setTimeout(function(){
             that._call();
         },5000);
     },
@@ -108,8 +108,8 @@ module.exports = Pagelet.extend({
 
         this.currIndex = index;
 
-        var currBanner = imgBox.find("li.img-on");
-        var nextBanner = imgBox.find("li").eq(index);
+        var currBanner = this.imgBox.find("li.img-on");
+        var nextBanner = this.imgBox.find("li").eq(index);
         if(currBanner[0] == nextBanner[0]) return;
 
         this.isPlaying = true;

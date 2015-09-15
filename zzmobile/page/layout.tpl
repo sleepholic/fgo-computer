@@ -9,6 +9,7 @@
     <meta name="description" content="{%block name='description'%}全球最大的面向中文互联网管理者、移动开发者、创业者的搜索流量管理的官方平台。提供有助于搜索引擎收录的工具、SEO建议、API接口、多端适配服务的能力等。{%/block%}" />
     {%block name="keywords"%}{%/block%}
     {%block name="block_head_static"%}{%/block%}
+    {%require name="zzmobile:static/lib/jquery.js"%}
     {%require name="zzmobile:static/lib/pagelet.js"%}
     {%require name="zzmobile:static/lib/listener.js"%}
 {%/head%}
