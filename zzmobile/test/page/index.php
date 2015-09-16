@@ -5,12 +5,12 @@ $fis_data = [
         [
             "link" => "http://zhanzhang.baidu.com/",
             "img" => "http://bs.baidu.com/zhanzhang/files/069801433142875.png",
-            "bg_color" => "#fff"
+            "bgcolor" => "#fff"
         ],
         [
             "link" => "http://zhanzhang.baidu.com/",
             "img" => "http://bs.baidu.com/zhanzhang/files/069801433142875.png",
-            "bg_color" => "#fff"
+            "bgcolor" => "#fff"
         ]
     ]
 ];

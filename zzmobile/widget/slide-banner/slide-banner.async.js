@@ -102,6 +102,7 @@ module.exports = Pagelet.extend({
         },5000);
     },
     _goto: function(index){
+        var that = this;
         if(this.isPlaying) return;
 
         index = (index+this.banners.length) % this.banners.length;
@@ -129,7 +130,7 @@ module.exports = Pagelet.extend({
             complete : function(){
                 currBanner.hide().removeClass("img-on");
                 nextBanner.addClass("img-on");
-                this.isPlaying = false;
+                that.isPlaying = false;
             }
         })
     }

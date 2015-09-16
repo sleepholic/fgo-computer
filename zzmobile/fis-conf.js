@@ -1,8 +1,10 @@
 fis.config.merge({
     namespace : 'zzmobile',
     pack : {
-        'static/pkg/aio.css' : 'static/style/**.css',
-        'static/pkg/aio.js' : 'static/lib/**.js'
+        '/static/pkg/css/index.css': [
+            'widget/slide-banner/slide-banner.scss',
+            'widget/nav/nav.scss'
+        ]
     }
 });
 fis.config.set('modules.parser', {
