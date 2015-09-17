@@ -1,6 +1,11 @@
 fis.config.merge({
     namespace : 'zzmobile',
     pack : {
+        '/static/pkg/js/all.js': [
+            'static/lib/jquery.js',
+            'static/lib/pagelet.js',
+            'static/lib/listener.js'
+        ],
         '/static/pkg/css/index.css': [
             'widget/slide-banner/slide-banner.scss',
             'widget/nav/nav.scss'

@@ -8,9 +8,8 @@
 </div>
 
 {%script%}
-
     require('./slide-banner.async.js').create({
         bannerList: {%json_encode($bannerList)%},
         container: $('#widgetSlideBanner')
-        });
+    });
 {%/script%}
