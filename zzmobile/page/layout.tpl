@@ -4,6 +4,7 @@
 {%head%}
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width">
     <meta content="{%$description%}" name="description">
     <title>{%block name="block_title"%}百度站长平台_让网站更具价值{%/block%}</title>
     <meta name="description" content="{%block name='description'%}全球最大的面向中文互联网管理者、移动开发者、创业者的搜索流量管理的官方平台。提供有助于搜索引擎收录的工具、SEO建议、API接口、多端适配服务的能力等。{%/block%}" />
