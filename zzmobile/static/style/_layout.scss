@@ -1,0 +1,179 @@
+/**
+ * layout.css contains all the base styles, including typography\color\utilities.
+ * In future developing,all the base style of tags or classes should be called from this file to 
+ * keep the style of our site unified.
+ * DO NOT override styles in this code if not nessesary.
+ * Modification of this file should be approved by all FE members. 
+ */
+
+
+/**
+ * Browser Supporting
+ */
+$debug-browser-support: false;
+$browser-minimum-versions: (
+  "ie": "9"
+);
+
+//don't compile filter for ie8(4.46)
+//$opacity-usage-threshold: 5;
+
+/**
+ * Base typography
+ */
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0}
+fieldset,img{
+	border:0;
+}
+body{
+	font: normal $font-size-base $font-family-songti;
+	color: $text-gray-dark;
+	//smaller than normal font-size
+	.small {
+		font-size: $font-size-small;
+	}
+}
+h1{
+	font: normal $font-size-h1 $font-family-yahei;
+}
+h2{
+	font: bold $font-size-h2 $font-family-yahei;
+}
+h3{
+	font: bold $font-size-h3 $font-family-yahei;
+}
+h4{
+	font: bold $font-size-h4 $font-family-songti;
+}
+h5{
+	font: bold $font-size-h5 $font-family-songti;
+}
+h1 {
+	color: $text-gray-darker;
+	//Secondary text
+	small{
+		font-size: $font-size-base;
+		font-family: $font-family-songti;
+		color: $text-gray;	
+	}
+}
+
+a{
+	cursor: pointer;
+	@include hover-link;
+	@include link-colors($brand-blue);
+}
+
+ul{
+	margin: 0;
+	padding: 0;
+
+	@include no-bullet;
+}
+
+//
+// sprite 
+//
+// $icon-spacing: 10px;
+// @import "icon/*.png";
+// //$icons: sprite-map("icon/*.png");
+// @include all-icon-sprites(true);
+
+
+/**
+ * Utilities
+ */
+
+.clearfix{
+	@include pie-clearfix;
+}
+.left{
+	@include float-left;
+}
+.right{
+	@include float-right;
+}
+.hide{
+	display:none;
+}
+.nowrap{
+	@include nowrap;
+}
+.wordwrap{
+	word-break:break-all;
+	word-wrap:break-word;
+}
+pre.wordwrap{
+	white-space:pre-wrap;
+}
+.emphasis{
+	color: $brand-red;
+}
+.info{
+	color: $brand-blue;
+}
+.yahei{
+	font-family: $font-family-yahei;
+}
+.songti{
+	font-family: $font-family-songti;
+}
+.arial{
+    font-family: $font-family-arial;
+}
+.mod-tools-subtitle{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0 5px;
+    font-size: $font-size-base;
+    line-height: $font-size-base + 2;
+    border-left: 5px solid $brand-blue;
+}
+
+//intro page
+.mod-intro{
+    img{
+        border: 1px solid $border-gray;
+        max-width: 760px;
+    }
+}
+//main page
+.layout-main{
+    min-height: 400px;
+}
+//
+// table
+//
+
+table{
+	@include table-base;
+}
+//
+// buttons
+//
+@each $size in large,big,mid,small{
+	@each $type in 'blue','red',wht,lose{
+		.btn-#{$size}-#{$type}{
+			@include btn-type($size,$type);
+		}
+	}
+}
+
+// .btn-add{
+//     font-weight: bold;
+//     letter-spacing: 1px;
+//     &:before{
+//         content: '';
+//         width: 19px;
+//         height: 19px;
+//         line-height: 0;
+//         font-size: 0;
+//         display: inline-block;
+//         vertical-align: middle;
+//         margin: -2px 10px 0 -8px;
+
+//         background: sprite-url($icon-sprites);
+//         background-position: sprite-position($icon-sprites, plus);
+//     }
+    
+// }

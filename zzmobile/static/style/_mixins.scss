@@ -1,0 +1,314 @@
+//---- Mixins
+
+//table
+@mixin table-base($font-size: $font-size-base,$align: center){
+	border-collapse: collapse;
+	//table-layout: fixed;
+
+	text-align: $align;
+
+	font-size: $font-size;
+	//border: $table-border;
+	//color: $text-gray-darker;
+
+	th{
+		font-weight: bold;
+		background-color: $table-head-bg;
+	}
+	th small,
+	td small{
+		@extend .small;
+		color: $text-gray;
+	}
+}
+
+//buttons
+@mixin btn-type($size,$type){
+  
+  @if $size == large{
+    width: 200px;
+    height: 45px;
+    line-height: 45px !important;
+    font: $font-size-h3 $font-family-yahei;
+  } @else if $size == big{
+    width: 155px;
+    height: 35px;
+    line-height: 35px !important;
+    font: $font-size-base $font-family-songti;
+  } @else if $size == mid{
+    width: 85px;
+    height: 30px;
+    line-height: 30px !important;
+    font: $font-size-small $font-family-songti;
+  } @else if $size == small{
+    width: 65px;
+    height: 30px;
+    line-height: 30px !important;
+    font: $font-size-small $font-family-songti;
+  }
+  cursor: pointer;  
+  outline: none;
+  display: inline-block;
+  text-align: center;
+  
+  @if $type == lose{
+    color: $text-gray;
+    border: 1px solid $border-gray-darker;
+    background-color: $brand-lose;
+  } @else{
+    @if $type == wht{
+      color: $text-gray-dark;
+      border: 1px solid $border-gray-dark;
+      background-color: $brand-wht;
+      @if ($size == big or $size == large) {
+          @include box-shadow(0 -4px $brand-wht-inset inset);
+      }
+    } 
+    @if $type == 'blue'{
+      color: $brand-wht;
+      border: none;
+      background-color: $brand-blue;
+      @if ($size == big or $size == large) {
+          @include box-shadow(0 -4px $brand-blue-inset inset);
+      }
+    } 
+    @if $type == 'red'{
+      color: $brand-wht;
+      border: none;
+      background-color: $brand-red;
+      @if ($size == big or $size == large) {
+          @include box-shadow(0 -4px $brand-red-inset inset);
+      }
+    }
+    &:hover{
+      text-decoration: none;
+      @if $type == wht{
+        color: $brand-blue;
+      } @else{
+        @if $type == 'blue'{
+          background-color: $brand-blue-hover;
+        }
+        @if $type == 'red'{
+          background-color: $brand-red-hover;
+        }
+      }
+    }
+  }
+}
+
+//三角形
+@mixin icon-arrow-type($type,$size:5px,$color:$text-gray-dark){
+  border-color: transparent;
+  border-style: solid;
+  border-width: $size;
+  border-#{$type}-color:$color;
+  //设置四个边框的宽度，transparent支持ie7+
+  width:0;
+  height:0;
+  line-height:0;
+  font-size:0;
+}
+// Framework grid generation
+//
+// Used only by Bootstrap to generate the correct number of grid classes given
+// any value of `$grid-columns`.
+
+// [converter] This is defined recursively in LESS, but Sass supports real loops
+@mixin make-grid-columns($i: 1, $list: ".col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}") {
+  @for $i from (1 + 1) through $grid-columns {
+    $list: "#{$list}, .col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}";
+  }
+  #{$list} {
+    position: relative;
+    // Prevent columns from collapsing when empty
+    min-height: 1px;
+    // Inner gutter via padding
+    padding-left:  ($grid-gutter-width / 2);
+    padding-right: ($grid-gutter-width / 2);
+  }
+}
+
+
+// [converter] This is defined recursively in LESS, but Sass supports real loops
+@mixin float-grid-columns($class, $i: 1, $list: ".col-#{$class}-#{$i}") {
+  @for $i from (1 + 1) through $grid-columns {
+    $list: "#{$list}, .col-#{$class}-#{$i}";
+  }
+  #{$list} {
+    float: left;
+  }
+}
+
+
+@mixin calc-grid-column($index, $class, $type) {
+  @if ($type == width) and ($index > 0) {
+    .col-#{$class}-#{$index} {
+      width: percentage(($index / $grid-columns));
+    }
+  }
+  @if ($type == push) and ($index > 0) {
+    .col-#{$class}-push-#{$index} {
+      left: percentage(($index / $grid-columns));
+    }
+  }
+  @if ($type == push) and ($index == 0) {
+    .col-#{$class}-push-0 {
+      left: auto;
+    }
+  }
+  @if ($type == pull) and ($index > 0) {
+    .col-#{$class}-pull-#{$index} {
+      right: percentage(($index / $grid-columns));
+    }
+  }
+  @if ($type == pull) and ($index == 0) {
+    .col-#{$class}-pull-0 {
+      right: auto;
+    }
+  }
+  @if ($type == offset) {
+    .col-#{$class}-offset-#{$index} {
+      margin-left: percentage(($index / $grid-columns));
+    }
+  }
+}
+
+// [converter] This is defined recursively in LESS, but Sass supports real loops
+@mixin loop-grid-columns($columns, $class, $type) {
+  @for $i from 0 through $columns {
+    @include calc-grid-column($i, $class, $type);
+  }
+}
+
+
+// Create grid for specific class
+@mixin make-grid($class) {
+  @include float-grid-columns($class);
+  @include loop-grid-columns($grid-columns, $class, width);
+  @include loop-grid-columns($grid-columns, $class, pull);
+  @include loop-grid-columns($grid-columns, $class, push);
+  @include loop-grid-columns($grid-columns, $class, offset);
+}
+
+// Grid system
+//
+// Generate semantic grid columns with these mixins.
+
+// Centered container element
+@mixin container-fixed($gutter: $grid-gutter-width) {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left:  ($gutter / 2);
+  padding-right: ($gutter / 2);
+  @include clearfix();
+}
+
+// Creates a wrapper for a series of columns
+@mixin make-row($gutter: $grid-gutter-width) {
+  margin-left:  ($gutter / -2);
+  margin-right: ($gutter / -2);
+  @include clearfix();
+}
+
+// Generate the extra small columns
+@mixin make-xs-column($columns, $gutter: $grid-gutter-width) {
+  position: relative;
+  float: left;
+  width: percentage(($columns / $grid-columns));
+  min-height: 1px;
+  padding-left:  ($gutter / 2);
+  padding-right: ($gutter / 2);
+}
+@mixin make-xs-column-offset($columns) {
+  margin-left: percentage(($columns / $grid-columns));
+}
+@mixin make-xs-column-push($columns) {
+  left: percentage(($columns / $grid-columns));
+}
+@mixin make-xs-column-pull($columns) {
+  right: percentage(($columns / $grid-columns));
+}
+
+// Generate the small columns
+@mixin make-sm-column($columns, $gutter: $grid-gutter-width) {
+  position: relative;
+  min-height: 1px;
+  padding-left:  ($gutter / 2);
+  padding-right: ($gutter / 2);
+
+  @media (min-width: $screen-sm-min) {
+    float: left;
+    width: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-sm-column-offset($columns) {
+  @media (min-width: $screen-sm-min) {
+    margin-left: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-sm-column-push($columns) {
+  @media (min-width: $screen-sm-min) {
+    left: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-sm-column-pull($columns) {
+  @media (min-width: $screen-sm-min) {
+    right: percentage(($columns / $grid-columns));
+  }
+}
+
+// Generate the medium columns
+@mixin make-md-column($columns, $gutter: $grid-gutter-width) {
+  position: relative;
+  min-height: 1px;
+  padding-left:  ($gutter / 2);
+  padding-right: ($gutter / 2);
+
+  @media (min-width: $screen-md-min) {
+    float: left;
+    width: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-md-column-offset($columns) {
+  @media (min-width: $screen-md-min) {
+    margin-left: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-md-column-push($columns) {
+  @media (min-width: $screen-md-min) {
+    left: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-md-column-pull($columns) {
+  @media (min-width: $screen-md-min) {
+    right: percentage(($columns / $grid-columns));
+  }
+}
+
+// Generate the large columns
+@mixin make-lg-column($columns, $gutter: $grid-gutter-width) {
+  position: relative;
+  min-height: 1px;
+  padding-left:  ($gutter / 2);
+  padding-right: ($gutter / 2);
+
+  @media (min-width: $screen-lg-min) {
+    float: left;
+    width: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-lg-column-offset($columns) {
+  @media (min-width: $screen-lg-min) {
+    margin-left: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-lg-column-push($columns) {
+  @media (min-width: $screen-lg-min) {
+    left: percentage(($columns / $grid-columns));
+  }
+}
+@mixin make-lg-column-pull($columns) {
+  @media (min-width: $screen-lg-min) {
+    right: percentage(($columns / $grid-columns));
+  }
+}
