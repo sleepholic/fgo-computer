@@ -1,0 +1,14 @@
+@import "static/style/variables";
+#widgetArticleBlock{
+    border: 1px solid #666;
+    margin: 5px;
+    h3{
+        background-color: $bg-gray;
+    }
+    a{
+        color: #666;
+    }
+    li{
+        margin: 5px 0;
+    }
+}

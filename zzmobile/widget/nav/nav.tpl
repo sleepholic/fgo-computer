@@ -1,4 +1,4 @@
-<div id="widgetNav">
+<div id="widgetNav" class="clearfix">
     <ul>
         <li>站长工具<i class="icon-remind"></i></li>
         <li>站长学院</li>

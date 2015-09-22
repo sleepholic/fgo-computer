@@ -1,7 +1,5 @@
 {%extends file="zzmobile/page/layout.tpl"%}
-{%block name="block_head_static"%}
 
-{%/block%}
 {%block name="block_main"%}
     {%widget
         name="zzmobile:widget/header/header.tpl"
@@ -13,13 +11,22 @@
     {%widget
         name="zzmobile:widget/nav/nav.tpl"
     %}
-    {%foreach $articleBlock as $item%}
-        {%widget
-            name="zzmobile:widget/article-block/article-block.tpl"
-            articles=$item.articles
-            title=$item.title
-            morelink=$item.morelink
-            category=$item.category
-        %}
-    {%/foreach%}
+    {%widget
+        name="zzmobile:widget/article-block/article-block.tpl"
+        articles=$articles.news
+        title="产品动态"
+        morelink=""
+    %}
+    {%widget
+        name="zzmobile:widget/article-block/article-block.tpl"
+        articles=$articles.academy
+        title="站长学院"
+        morelink=""
+    %}
+    {%widget
+        name="zzmobile:widget/article-block/article-block.tpl"
+        articles=$articles.salon
+        title="活动沙龙"
+        morelink=""
+    %}
 {%/block%}

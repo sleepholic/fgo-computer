@@ -1,8 +1,8 @@
 
 <div id="widgetArticleBlock">
-    <div>
-        <h3><a href="{%$morelink%}">{%$title%}</a></h3>
-    </div>
+    {%if !empty($title)%}
+    <h3><a href="{%$morelink%}">{%$title%} &gt;&gt;</a></h3>
+    {%/if%}
     <ul>
         {%foreach $articles as $item%}
         <li>
@@ -14,4 +14,11 @@
         </li>
         {%/foreach%}
     </ul>
+    {%if !empty($subtitle)%}
+    <div>
+        {%foreach $subtitle as $item%}
+        <h3><a href="{%$item.link%}">{%$item.title%}</a></h3>
+        {%/foreach%}
+    </div>
+    {%/if%}
 </div>
