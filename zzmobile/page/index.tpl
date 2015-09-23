@@ -21,7 +21,7 @@
         name="zzmobile:widget/article-block/article-block.tpl"
         articles=$articles.academy
         title="站长学院"
-        morelink=""
+        morelink="academy/academy"
     %}
     {%widget
         name="zzmobile:widget/article-block/article-block.tpl"

@@ -12,6 +12,23 @@ fis.config.merge({
         ]
     }
 });
+fis.config.merge({
+    deploy: {
+        sunlu : [{
+            receiver: "http://cq01-ps-dev375.cq01.baidu.com:8090/receiver.php",
+            //从产出的结果的static目录下找文件
+            from : '/static/zzmobile',
+            //保存到远端机器
+            to : '/frontend/webroot/zzmobile'
+        }, {
+            receiver: "http://cq01-ps-dev375.cq01.baidu.com:8090/receiver.php",
+            //从产出的结果的static目录下找文件
+            from : '/template/zzmobile',
+            //保存到远端机器
+            to : '/frontend/views/zzmobile',
+        }]
+    }
+})
 fis.config.set('modules.parser', {
     sass : 'sass',
     scss: 'sass'
