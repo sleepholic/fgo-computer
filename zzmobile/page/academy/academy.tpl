@@ -7,4 +7,12 @@
         title="站长学院"
         user=$user
     %}
+    {%foreach $lessons as $lesson%}
+        {%widget
+            name="zzmobile:widget/lesson/lesson.tpl"
+            title=$lesson.title
+            desc=$lesson.desc
+            sections=$lesson.sections
+        %}
+    {%/foreach%}
 {%/block%}
