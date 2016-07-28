@@ -3,16 +3,23 @@
   <head>
     <meta charset="utf-8">
     <title>fgo</title>
+    <script src="../vue.js"></script>
   </head>
   <body>
-    <div v-for="(servant, data) in servants">
+    <div id="indexEle">
       <ul>
-        <li v-for="(item, num) in data">
-          <span>{{item}}</span>
-          <span>{{num}}</span>
-        </li>
+        <li v-for="num in materialList">{{$key}}: 所持: {{num}}</li>
       </ul>
+      <div v-for="(servant, data) in servantsStatus">
+        {{servant}}
+        <ul>
+          <li v-for="(item, num) in data">
+            <span>{{item}}</span>
+            <span>{{num}}</span>
+          </li>
+        </ul>
+      </div>
     </div>
-    <script src="/index.js"></script>
+    <script src="../js/index.js"></script>
   </body>
 </html>
